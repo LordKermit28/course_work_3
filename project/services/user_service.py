@@ -3,7 +3,7 @@ from project.tools.security import generate_password_hash
 
 
 class UserService:
-    def __init__(self,dao: UserDAO):
+    def __init__(self, dao: UserDAO):
         self.dao = dao
 
     def get_one(self, uid):

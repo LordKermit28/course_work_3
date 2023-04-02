@@ -34,3 +34,11 @@ auth_result: Model = api.model('', {
     'access_token': fields.String(required=True),
     'refresh_token': fields.String(required=True),
 })
+
+user: Model = api.model('Пользователь', {
+    'email': fields.String(required=True),
+    'password': fields.String(required=True),
+    'name': fields.String(required=True),
+    'surname': fields.String(required=True),
+    'favorite_genre': fields.String(required=True),
+})
