@@ -20,14 +20,12 @@ def generate_password_hash(password: str) -> str:
 
 
 def compare_password(password_hash, other_password) -> bool:
-
     return hmac.compare_digest(
-        base64.b64encode(password_hash),
+        base64.b64decode((password_hash)),
         hashlib.pbkdf2_hmac('sha256',
                              other_password.encode('utf-8'),
                              salt=current_app.config["PWD_HASH_SALT"],
-                             iterations=current_app.config["PWD_HASH_ITERATIONS"])
-    )
+                             iterations=current_app.config["PWD_HASH_ITERATIONS"]))
 
 def get_email_from_token(data):
     token = data['Authorization'].split('Bearer ')[-1]

@@ -24,7 +24,7 @@ class AuthService:
                 abort(400)
 
         data = {
-            'email':user.email,
+            'email': user.email,
         }
 
         """access token"""

@@ -4,7 +4,7 @@ from project.container import user_service
 from project.setup.api.models import user
 from project.setup.api.parsers import page_parser
 
-api = Namespace('user')
+api = Namespace('users')
 
 @api.route('/')
 class UsersView(Resource):
@@ -26,3 +26,13 @@ class UserView(Resource):
         Get user by id.
         """
         return user_service.get_one(user_id)
+
+
+# @api.route('/<email:email>/')
+# class UserViewMail(Resource):
+#     @api.marshal_with(user, code=200, description='OK')
+#     def get(self, email: str):
+#         """
+#         Get user by email.
+#         """
+#         return user_service.get_by_email(email)

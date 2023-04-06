@@ -1,9 +1,8 @@
 
-
 from flask import request
 from flask_restx import Namespace, Resource, abort
 from project.container import auth_service, user_service
-from project.setup.api.models import  auth, auth_result
+from project.setup.api.models import auth, auth_result
 
 api = Namespace('auth')
 
@@ -22,8 +21,9 @@ class AuthView(Resource):
     def post(self):
 
         data = request.json
-        email = data.get("email")
-        password = data.get("password")
+
+        email = data.get("email", None)
+        password = data.get("password", None)
 
         if None in [email, password]:
             abort(400)
