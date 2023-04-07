@@ -45,9 +45,9 @@ class UserDAO:
         if user_data.get("name"):
             user.name = user_data.get("name")
         if user_data.get("surname"):
-            user.surname = user_data("surname")
-        if user_data("favorite_genre"):
-            user.favorite_genre = user_data("favorite_genre")
+            user.surname = user_data["surname"]
+        if user_data.get("favorite_genre"):
+            user.favorite_genre = user_data["favorite_genre"]
 
         try:
             self.session.add(user)
@@ -56,9 +56,7 @@ class UserDAO:
         except IntegrityError:
             raise UserAlreadyExists
 
-
-    def update_password(self, email, new_password):
-        user = self.get_by_email(email)
+    def update_password(self, user, new_password):
         user.password = generate_password_hash(new_password)
 
         self.session.add(user)

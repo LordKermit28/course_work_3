@@ -1,3 +1,4 @@
+from flask import request
 from flask_restx import Namespace, Resource
 
 from project.container import user_service
@@ -27,12 +28,12 @@ class UserView(Resource):
         """
         return user_service.get_one(user_id)
 
+    def put(self, user_id: int):
+        password = request.args.get('password')
+        user = user_service.get_one(user_id)
+        if not user:
+            return {"message": "User not found"}, 404
+        user_service.update_password(user, password)
+        return "", 204
 
-# @api.route('/<email:email>/')
-# class UserViewMail(Resource):
-#     @api.marshal_with(user, code=200, description='OK')
-#     def get(self, email: str):
-#         """
-#         Get user by email.
-#         """
-#         return user_service.get_by_email(email)
+
