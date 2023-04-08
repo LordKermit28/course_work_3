@@ -28,12 +28,16 @@ class UserView(Resource):
         """
         return user_service.get_one(user_id)
 
+@api.route('/password/<int:user_id>')
+class UserPasswordView(Resource):
+    @api.response(404, 'Not Found')
+    @api.marshal_with(user, code=204, description='Password Updated')
     def put(self, user_id: int):
-        password = request.args.get('password')
+        password = request.json.get('password')
         user = user_service.get_one(user_id)
         if not user:
             return {"message": "User not found"}, 404
+
         user_service.update_password(user, password)
         return "", 204
-
 
